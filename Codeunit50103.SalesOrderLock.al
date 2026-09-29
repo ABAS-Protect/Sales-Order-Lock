@@ -24,11 +24,12 @@ codeunit 50103 "SalesOrderLock"
 
         if SalesOrderNo = '' then exit;
 
-        UsersInPlans.SetFilter(User_Security_ID, '%1', UserSecurityId());
+        UsersInPlans.SetRange(User_Security_ID, UserSecurityId());
         UsersInPlans.Open();
         while UsersInPlans.Read() do begin
-            if UsersInPlans.Plan_Name.Contains('Premium') then
+            if StrPos(LowerCase(UsersInPlans.Plan_Name), 'premium') > 0 then begin
                 IsDeliveryUser := true;
+            end;
         end;
         UsersInPlans.Close();
 
