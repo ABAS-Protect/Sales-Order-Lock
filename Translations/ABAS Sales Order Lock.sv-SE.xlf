@@ -4,8 +4,8 @@
     <body>
       <group id="body">
         <trans-unit id="Codeunit 2961051903 - Method 2274267630 - NamedType 469074072" size-unit="char" translate="yes" xml:space="preserve">
-          <source>This Sales Order cannot be modified or reopened because a Warehouse Pick has already been created for it.</source>
-          <target>Försäljningsorder kan inte ändras eller raderas eftersom ett lagerplock finns.</target>
+          <source>This Sales Order cannot be reopened because a Warehouse Pick has already been created for it.</source>
+          <target>Försäljningsorder kan inte återöppnas eftersom ett lagerplock finns.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SalesOrderLock - Method CheckIfPickExistsAndUserBlocked - NamedType PickExistsErr</note>
         </trans-unit>

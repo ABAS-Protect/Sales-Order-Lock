@@ -12,25 +12,11 @@ codeunit 50103 "SalesOrderLock"
         CheckIfPickExistsAndUserBlocked(SalesHeader."No.");
     end;
 
-    [EventSubscriber(ObjectType::Table, Database::"Sales Line", 'OnBeforeModifyEvent', '', false, false)]
-    local procedure OnBeforeModifySalesLine(var Rec: Record "Sales Line")
-    begin
-        if Rec.IsTemporary then exit;
-        CheckIfPickExistsAndUserBlocked(Rec."Document No.");
-    end;
-
-    [EventSubscriber(ObjectType::Table, Database::"Sales Line", 'OnBeforeDeleteEvent', '', false, false)]
-    local procedure OnBeforeDeleteSalesLine(var Rec: Record "Sales Line")
-    begin
-        if Rec.IsTemporary then exit;
-        CheckIfPickExistsAndUserBlocked(Rec."Document No.");
-    end;
-
     local procedure CheckIfPickExistsAndUserBlocked(SalesOrderNo: Code[20])
     var
         WhseActivityLine: Record "Warehouse Activity Line";
         UsersInPlans: Query "Users in Plans";
-        PickExistsErr: Label 'This Sales Order cannot be modified or reopened because a Warehouse Pick has already been created for it.';
+        PickExistsErr: Label 'This Sales Order cannot be reopened because a Warehouse Pick has already been created for it.';
         IsDeliveryUser: Boolean;
     begin
         if SalesOrderNo = '' then exit;

@@ -4,7 +4,7 @@
     <body>
       <group id="body">
         <trans-unit id="Codeunit 2961051903 - Method 2274267630 - NamedType 469074072" size-unit="char" translate="yes" xml:space="preserve">
-          <source>This Sales Order cannot be modified or reopened because a Warehouse Pick has already been created for it.</source>
+          <source>This Sales Order cannot be reopened because a Warehouse Pick has already been created for it.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SalesOrderLock - Method CheckIfPickExistsAndUserBlocked - NamedType PickExistsErr</note>
         </trans-unit>
