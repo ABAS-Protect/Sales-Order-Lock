@@ -19,6 +19,9 @@ codeunit 50103 "SalesOrderLock"
         PickExistsErr: Label 'This Sales Order cannot be reopened because a Warehouse Pick has already been created for it.';
         IsDeliveryUser: Boolean;
     begin
+        if not GuiAllowed then
+            exit;
+
         if SalesOrderNo = '' then exit;
 
         UsersInPlans.SetFilter(User_Security_ID, '%1', UserSecurityId());
