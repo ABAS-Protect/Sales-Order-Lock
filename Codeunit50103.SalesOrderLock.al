@@ -3,6 +3,15 @@
     Date: 2026-09-28
     Description: Prevent sales staff from reopening released sales order with warehouse activity.
 */
+
+permissionset 50104 SalesOrderLock
+{
+    Assignable = true;
+    Caption = 'App Permissions';
+    Permissions =
+        codeunit SalesOrderLock = X;
+}
+
 codeunit 50103 "SalesOrderLock"
 {
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Release Sales Document", 'OnBeforeReopenSalesDoc', '', false, false)]
