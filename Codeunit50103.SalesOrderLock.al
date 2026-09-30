@@ -15,25 +15,14 @@ codeunit 50103 "SalesOrderLock"
     local procedure CheckIfPickExistsAndUserBlocked(SalesOrderNo: Code[20])
     var
         WhseActivityLine: Record "Warehouse Activity Line";
-        UsersInPlans: Query "Users in Plans";
         PickExistsErr: Label 'This Sales Order cannot be reopened because a Warehouse Pick has already been created for it.';
-        IsDeliveryUser: Boolean;
     begin
         if not GuiAllowed then
             exit;
 
         if SalesOrderNo = '' then exit;
 
-        UsersInPlans.SetRange(User_Security_ID, UserSecurityId());
-        UsersInPlans.Open();
-        while UsersInPlans.Read() do begin
-            if StrPos(LowerCase(UsersInPlans.Plan_Name), 'premium') > 0 then begin
-                IsDeliveryUser := true;
-            end;
-        end;
-        UsersInPlans.Close();
-
-        if IsDeliveryUser then
+        if CheckIfPremiumUser() then
             exit;
 
         WhseActivityLine.SetRange("Source Type", Database::"Sales Line");
@@ -43,5 +32,16 @@ codeunit 50103 "SalesOrderLock"
 
         if not WhseActivityLine.IsEmpty then
             Error(PickExistsErr);
+    end;
+
+    local procedure CheckIfPremiumUser(): Boolean
+    var
+        AccessControl: Record "Access Control";
+    begin
+        AccessControl.SetRange("User Security ID", UserSecurityId());
+        AccessControl.SetRange("Role ID", 'D365 BUS PREMIUM');
+        // AccessControl.SetFilter("Company Name", '%1|%2', '', CompanyName());
+
+        exit(not AccessControl.IsEmpty());
     end;
 }
