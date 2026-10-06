@@ -3,10 +3,15 @@
   <file datatype="xml" source-language="en-US" target-language="en-US" original="ABAS Sales Order Lock">
     <body>
       <group id="body">
-        <trans-unit id="Codeunit 2961051903 - Method 2274267630 - NamedType 469074072" size-unit="char" translate="yes" xml:space="preserve">
-          <source>This Sales Order cannot be reopened because a Warehouse Pick has already been created for it.</source>
+        <trans-unit id="Codeunit 2961051903 - Method 865592565 - NamedType 64258721" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This sales order cannot be reopened because warehouse activity exists.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SalesOrderLock - Method CheckIfPickExistsAndUserBlocked - NamedType PickExistsErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SalesOrderLock - Method OnBeforeReopenSalesDoc - NamedType NoPermissionErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2961051903 - Method 865592565 - NamedType 1810506814" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Warning: This sales order has warehouse documents or shipping consignments attached to it.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SalesOrderLock - Method OnBeforeReopenSalesDoc - NamedType WhseDocsExistWarningMsg</note>
         </trans-unit>
         <trans-unit id="PermissionSet 2961051903 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>App Permissions</source>
