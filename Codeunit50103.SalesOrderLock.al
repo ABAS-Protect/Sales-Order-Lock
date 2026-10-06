@@ -16,7 +16,6 @@ codeunit 50103 "SalesOrderLock"
 {
     Permissions = tabledata "Warehouse Activity Line" = r,
                   tabledata "Warehouse Shipment Line" = r,
-                  tabledata "LTC Consignment Header" = r,
                   tabledata "Sales Shipment Header" = r;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Release Sales Document", 'OnBeforeReopenSalesDoc', '', false, false)]
