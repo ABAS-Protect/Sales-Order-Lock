@@ -42,8 +42,8 @@ codeunit 50103 "SalesOrderLock"
     var
         WhseShipmentLine: Record "Warehouse Shipment Line";
         WhseActivityLine: Record "Warehouse Activity Line";
-        LTCConsignmentHeader: Record "LTC Consignment Header";
         SalesShipmentHeader: Record "Sales Shipment Header";
+        LogTradeLockHelper: Codeunit "LogTradeLockHelper";
         LogTradeModuleInfo: ModuleInfo;
         LogTradeAppId: Guid;
     begin
@@ -62,9 +62,7 @@ codeunit 50103 "SalesOrderLock"
 
         LogTradeAppId := '424ef2c1-1fe0-4551-8608-3de6dbb073e0';
         if NavApp.GetModuleInfo(LogTradeAppId, LogTradeModuleInfo) then begin
-            LTCConsignmentHeader.SetRange("Source Document Type", LTCConsignmentHeader."Source Document Type"::"Sales Order");
-            LTCConsignmentHeader.SetRange("Source Document No.", SalesOrderNo);
-            if not LTCConsignmentHeader.IsEmpty() then
+            if LogTradeLockHelper.CheckIfConsignmentExists(SalesOrderNo) then
                 exit(true);
         end;
 
